@@ -12,6 +12,6 @@ fun fuelRequiredFull(mass: Int): Int {
 fun main() {
     val inp = object {}.javaClass.getResource("/day1/input.txt").readText()
     val masses = inp.lines().mapNotNull { it.toIntOrNull() }
-    println(masses.map { fuelRequired(it) }.sum())
-    println(masses.map { fuelRequiredFull(it) }.sum())
+    println(masses.sumBy { fuelRequired(it) })
+    println(masses.sumBy { fuelRequiredFull(it) })
 }
