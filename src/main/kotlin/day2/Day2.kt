@@ -19,17 +19,20 @@ fun Program.run(noun: Int, verb: Int): Int? {
     val instr = instructions.toMutableList()
     instr[1] = noun
     instr[2] = verb
-    return run(instr)?.get(0);
+    return run(instr)?.get(0)
 }
+
+fun <T, U> Sequence<T>.product(other: Sequence<U>): Sequence<Pair<T, U>> =
+    flatMap { a -> other.map { b ->  Pair(a, b) }}
 
 fun main() {
     val inp = object {}.javaClass.getResource("/day2/input.txt").readText().trim()
     val program = Program(inp.split(',').map { it.toInt() }.toList())
     println(program.run(12, 2))
 
-    // TODO: this seems like something that could be fun to do with cartesian product of two sequences
-    for (n in 0..99)
-        for (v in 0..99)
-            if (program.run(n, v) == 19690720)
-                println (100 * n + v)
+    val possibleValues = (0..99).asSequence()
+    possibleValues
+        .product(possibleValues)
+        .find { program.run(it.first, it.second) == 19690720 }
+        ?.also { (noun, verb) -> println(100 * noun + verb) }
 }
