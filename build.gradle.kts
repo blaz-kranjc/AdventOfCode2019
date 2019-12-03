@@ -34,3 +34,15 @@ task("day2", JavaExec::class) {
     main = "day2.Day2Kt"
     classpath = sourceSets["main"].runtimeClasspath
 }
+
+task("day3", JavaExec::class) {
+    group = "aoc"
+    main = "day3.Day3Kt"
+    classpath = sourceSets["main"].runtimeClasspath
+}
+
+task("day4", JavaExec::class) {
+    group = "aoc"
+    main = "day4.Day4Kt"
+    classpath = sourceSets["main"].runtimeClasspath
+}

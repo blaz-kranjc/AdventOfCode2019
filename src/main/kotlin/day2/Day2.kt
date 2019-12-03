@@ -33,6 +33,6 @@ fun main() {
     val possibleValues = (0..99).asSequence()
     possibleValues
         .product(possibleValues)
-        .find { program.run(it.first, it.second) == 19690720 }
-        ?.also { (noun, verb) -> println(100 * noun + verb) }
+        .find { (n, v) -> program.run(n, v) == 19690720 }
+        ?.also { (n, v) -> println(100 * n + v) }
 }
