@@ -58,7 +58,7 @@ class WireProbe(firstWire: Iterable<Instruction>, secondWire: Iterable<Instructi
 
     fun closestIntersectionWire(): Int? =
         wireDistanceToIntersection(firstPoints)
-            ?.mapNotNull { (p, cnt) -> wireDistanceToIntersection(secondPoints)?.getValue(p)?.plus(cnt) }
+            ?.mapNotNull { (p, cnt) -> wireDistanceToIntersection(secondPoints)?.get(p)?.plus(cnt) }
             ?.min()
 
     private fun wireDistanceToIntersection(points: List<Point>): Map<Point, Int>? {
