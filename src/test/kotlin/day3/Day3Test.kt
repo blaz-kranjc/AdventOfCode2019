@@ -6,13 +6,13 @@ import kotlin.test.assertEquals
 class Day3Test {
     @Test
     fun `Instruction parsing works`() {
-        assertEquals(u(123), parseInstruction("U123"))
-        assertEquals(d(1), parseInstruction("D1"))
-        assertEquals(l(72), parseInstruction("L72"))
-        assertEquals(r(15), parseInstruction("R15"))
-        assertEquals(null, parseInstruction("U"))
-        assertEquals(null, parseInstruction("X123"))
-        assertEquals(null, parseInstruction("A1"))
+        assertEquals(u(123), parseSegment("U123"))
+        assertEquals(d(1), parseSegment("D1"))
+        assertEquals(l(72), parseSegment("L72"))
+        assertEquals(r(15), parseSegment("R15"))
+        assertEquals(null, parseSegment("U"))
+        assertEquals(null, parseSegment("X123"))
+        assertEquals(null, parseSegment("A1"))
     }
 
     @Test
@@ -63,9 +63,9 @@ class Day3Test {
         assertEquals(410, example.closestIntersectionWire())
     }
 
-    private fun d(stepSize: Int): Instruction = Instruction(Direction.Down, stepSize)
-    private fun u(stepSize: Int): Instruction = Instruction(Direction.Up, stepSize)
-    private fun l(stepSize: Int): Instruction = Instruction(Direction.Left, stepSize)
-    private fun r(stepSize: Int): Instruction = Instruction(Direction.Right, stepSize)
+    private fun d(stepSize: Int): Segment = Segment(Direction.Down, stepSize)
+    private fun u(stepSize: Int): Segment = Segment(Direction.Up, stepSize)
+    private fun l(stepSize: Int): Segment = Segment(Direction.Left, stepSize)
+    private fun r(stepSize: Int): Segment = Segment(Direction.Right, stepSize)
 
 }

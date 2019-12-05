@@ -13,23 +13,23 @@ fun parseDirection(dir: Char): Direction? = when (dir) {
     else -> null
 }
 
-data class Instruction(val direction: Direction, val stepSize: Int)
+data class Segment(val direction: Direction, val stepSize: Int)
 
-fun parseInstruction(instruction: String): Instruction? {
-    val stepSize = instruction.substring(1).toIntOrNull() ?: return null
-    val direction = parseDirection(instruction.first()) ?: return null
-    return Instruction(direction, stepSize)
+fun parseSegment(str: String): Segment? {
+    val stepSize = str.substring(1).toIntOrNull() ?: return null
+    val direction = parseDirection(str.first()) ?: return null
+    return Segment(direction, stepSize)
 }
 
 data class Point(val x: Int, val y: Int) {
     fun manhattanDistance(other: Point = Point(0, 0)): Int = abs(this.x - other.x) + abs(this.y - other.y)
 }
 
-internal fun toPoints(instruction: Instruction, start: Point): List<Point> =
-    when (instruction.stepSize) {
+internal fun toPoints(segment: Segment, start: Point): List<Point> =
+    when (segment.stepSize) {
         0 -> emptyList()
-        else -> (1..instruction.stepSize).map {
-            when (instruction.direction) {
+        else -> (1..segment.stepSize).map {
+            when (segment.direction) {
                 Direction.Down -> Point(start.x, start.y - it)
                 Direction.Up -> Point(start.x, start.y + it)
                 Direction.Left -> Point(start.x - it, start.y)
@@ -38,15 +38,15 @@ internal fun toPoints(instruction: Instruction, start: Point): List<Point> =
         }
     }
 
-internal fun toPoints(instructions: Iterable<Instruction>, origin: Point = Point(0, 0)): List<Point> =
-    instructions
-        .fold(Pair(listOf(origin), origin)) { (l, p), instruction ->
-            val newList = l + toPoints(instruction, p)
+internal fun toPoints(segments: Iterable<Segment>, origin: Point = Point(0, 0)): List<Point> =
+    segments
+        .fold(Pair(listOf(origin), origin)) { (l, p), segment ->
+            val newList = l + toPoints(segment, p)
             Pair(newList, newList.last())
         }
         .first
 
-class WireProbe(firstWire: Iterable<Instruction>, secondWire: Iterable<Instruction>) {
+class WireProbe(firstWire: Iterable<Segment>, secondWire: Iterable<Segment>) {
     private val firstPoints: List<Point> = toPoints(firstWire)
     private val secondPoints: List<Point> = toPoints(secondWire)
     private val intersections: List<Point>?
@@ -76,9 +76,8 @@ fun main() {
     val (wireA, wireB) = inp
         .split('\n')
         .map {
-            it
-                .split(',')
-                .map { el -> parseInstruction(el) }
+            it.split(',')
+                .map { el -> parseSegment(el) }
                 .sequence()
         }
         .sequence()
