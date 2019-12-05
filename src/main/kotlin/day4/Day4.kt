@@ -1,18 +1,14 @@
 package day4
 
-fun Int.toDigits(acc: List<Int> = emptyList()): List<Int> = when {
-   this < 0 -> acc
-   this in 0..9 -> (acc + this).reversed()
-   else -> (this/10).toDigits(acc + this % 10)
-}
+import util.toDigits
 
 fun <T> Collection<T>.consecutiveCounts(): List<Int> = when {
     isEmpty() -> emptyList()
-    else -> drop(1).fold(Pair(listOf(1), this.elementAt(0))) {
-            (l, current), t -> when (t) {
-                current -> Pair(l.dropLast(1) + (l.last()+1), current)
-                else -> Pair(l + 1, t)
-            }
+    else -> drop(1).fold(Pair(listOf(1), this.elementAt(0))) { (l, current), t ->
+        when (t) {
+            current -> Pair(l.dropLast(1) + (l.last() + 1), current)
+            else -> Pair(l + 1, t)
+        }
     }.first
 }
 
