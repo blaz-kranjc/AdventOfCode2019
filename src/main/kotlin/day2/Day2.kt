@@ -5,7 +5,7 @@ import util.sequence
 
 data class Program(val instructions: List<Int>)
 
-fun run(ins: MutableList<Int>, current: Int = 0): List<Int>? = when (ins[current]) {
+tailrec fun run(ins: MutableList<Int>, current: Int = 0): List<Int>? = when (ins[current]) {
     1 -> {
         ins[ins[current + 3]] = ins[ins[current + 1]] + ins[ins[current + 2]]
         run(ins, current + 4)

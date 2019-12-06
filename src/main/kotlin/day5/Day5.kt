@@ -67,7 +67,7 @@ enum class Instruction {
     HALT
 }
 
-fun run(
+tailrec fun run(
     ins: MutableList<Int>,
     inputs: List<Int>,
     current: Int = 0,
