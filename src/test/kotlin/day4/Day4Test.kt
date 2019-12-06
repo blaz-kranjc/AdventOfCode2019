@@ -21,7 +21,7 @@ class Day4Test {
     fun `Increasing digit construction provides correct value`() {
         assertEquals(111111, IncreasingDigitsInt.nextValid(100000).toInt())
         assertEquals(123456, IncreasingDigitsInt.nextValid(123456).toInt())
-        assertEquals(123333, IncreasingDigitsInt.nextValid(123123).toInt())
+        assertEquals(123333, IncreasingDigitsInt.nextValid(123193).toInt())
     }
 
     @Test
