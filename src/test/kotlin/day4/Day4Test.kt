@@ -32,10 +32,12 @@ class Day4Test {
 
     @Test
     fun `Increasing digit sequence generates correct values`() {
-        assertEquals(listOf(79, 88, 89, 99, 111),
+        assertEquals(
+            listOf(79, 88, 89, 99, 111),
             increasingDigitsSeq(79, 111).map { it.toInt() }.toList()
         )
-        assertEquals(listOf(88, 89, 99),
+        assertEquals(
+            listOf(88, 89, 99),
             increasingDigitsSeq(87, 110).map { it.toInt() }.toList()
         )
     }
