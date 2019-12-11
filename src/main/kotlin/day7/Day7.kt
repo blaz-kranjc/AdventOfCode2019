@@ -29,7 +29,8 @@ class LoopBackAmplifierSequence(program: Program) {
     // TODO this is hideous
     private fun amplify(phases: List<Int>): Long {
         val outputs =
-            programs.zip(phases).map { (program, phase) -> program.rerun(listOf(phase.toLong())).second }.toMutableList()
+            programs.zip(phases).map { (program, phase) -> program.rerun(listOf(phase.toLong())).second }
+                .toMutableList()
         // Input first amplification
         outputs[0] += programs[0].run(listOf(0)).second
         while (programs.any { it.status() != Program.ProgramStatus.Halt }) {

@@ -3,6 +3,7 @@ package util
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+// TODO add tests removed from day 2 to here
 class ProgramTest {
 
     @Test
@@ -47,7 +48,8 @@ class ProgramTest {
 
     @Test
     fun `Example jump program (with position args) works`() {
-        val lessThanEightPos = Program(listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9).map { it.toLong() })
+        val lessThanEightPos =
+            Program(listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9).map { it.toLong() })
         assertEquals(lessThanEightPos.rerun(listOf(0)), Pair(StopType.Halted, listOf(0L)))
         assertEquals(lessThanEightPos.rerun(listOf(9)), Pair(StopType.Halted, listOf(1L)))
         assertEquals(lessThanEightPos.rerun(listOf(-1)), Pair(StopType.Halted, listOf(1L)))
@@ -69,7 +71,7 @@ class ProgramTest {
                 1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104,
                 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
             )
-            .map { it.toLong() }
+                .map { it.toLong() }
         )
         assertEquals(lessThanEightPos.rerun(listOf(7)), Pair(StopType.Halted, listOf(999L)))
         assertEquals(lessThanEightPos.rerun(listOf(8)), Pair(StopType.Halted, listOf(1000L)))
@@ -78,17 +80,20 @@ class ProgramTest {
 
     @Test
     fun `Example quine works`() {
-        val ins = listOf(109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99).map { it.toLong() }
+        val ins = listOf(109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99).map { it.toLong() }
         assertEquals(Program(ins).rerun(), Pair(StopType.Halted, ins))
     }
 
     @Test
     fun `Big number tests work`() {
-        val value = Program(listOf(1102,34915192,34915192,7,4,7,99,0)).rerun()
+        val value = Program(listOf(1102, 34915192, 34915192, 7, 4, 7, 99, 0)).rerun()
         assertEquals(value.first, StopType.Halted)
         assertEquals(value.second.size, 1)
         assertEquals(value.second.first().toString().length, 16)
 
-        assertEquals(Program(listOf(104L,1125899906842624L,99L)).rerun(), Pair(StopType.Halted, listOf(1125899906842624L)))
+        assertEquals(
+            Program(listOf(104L, 1125899906842624L, 99L)).rerun(),
+            Pair(StopType.Halted, listOf(1125899906842624L))
+        )
     }
 }

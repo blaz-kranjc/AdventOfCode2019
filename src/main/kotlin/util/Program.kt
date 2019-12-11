@@ -123,7 +123,7 @@ class Program(private val initialInstructions: List<Long>) {
     }
 
     fun setMemory(i: Long, value: Long) = when {
-        i < instructions.size -> instructions[i.toInt()] =  value
+        i < instructions.size -> instructions[i.toInt()] = value
         else -> memory[i] = value
     }
 
