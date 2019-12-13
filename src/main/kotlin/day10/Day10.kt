@@ -1,44 +1,43 @@
 package day10
 
-import kotlin.math.pow
+import util.IntVec2
+import util.gcd
 import kotlin.math.sign
-import kotlin.math.sqrt
 
-fun parseAsteroids(image: String): Set<Point> =
+fun parseAsteroids(image: String): Set<IntVec2> =
     image.split("\n")
         .withIndex()
         .flatMap { (rowIndex, row) ->
             row.toCharArray()
                 .withIndex()
                 .mapNotNull { (colIndex, char) ->
-                    if (char == '#') Point(colIndex, rowIndex) else null
+                    if (char == '#') IntVec2(colIndex, rowIndex) else null
                 }
         }.toSet()
 
-tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
-
-fun groupByDirection(point: Point, points: Set<Point>): Collection<List<Point>> =
+fun groupByDirection(point: IntVec2, points: Set<IntVec2>): Collection<List<IntVec2>> =
     points.groupBy { (point - it).direction() }
-        .filterNot { (k, _) -> k == Point(0, 0) }
+        .filterNot { (k, _) -> k == IntVec2(0, 0) }
         .values
 
-fun numberObservables(point: Point, points: Set<Point>): Int =
+fun numberObservables(point: IntVec2, points: Set<IntVec2>): Int =
     groupByDirection(point, points).count()
 
-fun bestObservationPoint(asteroids: Set<Point>): Pair<Point, Int>? =
+fun bestObservationPoint(asteroids: Set<IntVec2>): Pair<IntVec2, Int>? =
     asteroids
         .map { asteroid -> asteroid to numberObservables(asteroid, asteroids) }
         .maxBy { (_, count) -> count }
 
-fun shootingOrder(point: Point, points: Set<Point>): List<Point> {
+fun shootingOrder(point: IntVec2, points: Set<IntVec2>): List<IntVec2> {
     val groups = groupByDirection(point, points)
-    val circular = groups.sortedBy { v ->
-        val vec = point - v.first()
-        if (vec.x > 0) vec.y / vec.length() else -2 - vec.y / vec.length()
-    }
-        .map { group -> group.sortedBy { (it - point).length() }.toMutableList() }
+    val circular = groups
+        .sortedBy { v ->
+            val vec = point - v.first()
+            if (vec.x > 0) vec.y / vec.length() else -2 - vec.y / vec.length()
+        }
+        .map { group -> group.sortedBy { (it - point).lengthManhattan() }.toMutableList() }
         .toMutableList()
-    val order = mutableListOf<Point>()
+    val order = mutableListOf<IntVec2>()
     while (circular.isNotEmpty()) {
         circular.forEach { v ->
             order.add(v.first())
@@ -49,22 +48,14 @@ fun shootingOrder(point: Point, points: Set<Point>): List<Point> {
     return order
 }
 
-data class Point(val x: Int, val y: Int) {
-    fun direction(): Point =
-        when {
-            x == 0 && y == 0 -> Point(0, 0)
-            x == 0 -> Point(0, y.sign)
-            y == 0 -> Point(x.sign, 0)
-            else -> {
-                val denominator = x.sign * gcd(x, y)
-                Point(x / denominator, y / denominator)
-            }
-        }
-
-    fun length(): Double = sqrt(x.toDouble().pow(2) + y.toDouble().pow(2))
-
-    operator fun plus(other: Point): Point = Point(x + other.x, y + other.y)
-    operator fun minus(other: Point): Point = Point(x - other.x, y - other.y)
+fun IntVec2.direction(): IntVec2 = when {
+    x == 0 && y == 0 -> IntVec2(0, 0)
+    x == 0 -> IntVec2(0, y.sign)
+    y == 0 -> IntVec2(x.sign, 0)
+    else -> {
+        val denominator = x.sign * gcd(x, y)
+        IntVec2(x / denominator, y / denominator)
+    }
 }
 
 fun main() {

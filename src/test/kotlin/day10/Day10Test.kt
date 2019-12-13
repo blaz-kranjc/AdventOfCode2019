@@ -1,5 +1,6 @@
 package day10
 
+import util.IntVec2
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
@@ -17,7 +18,7 @@ class Day10Test {
         )
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(8, value)
-        assertEquals(8, numberObservables(Point(3, 4), asteroids))
+        assertEquals(8, numberObservables(IntVec2(3, 4), asteroids))
     }
 
     @Test
@@ -36,7 +37,7 @@ class Day10Test {
         )
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(33, value)
-        assertEquals(33, numberObservables(Point(5, 8), asteroids))
+        assertEquals(33, numberObservables(IntVec2(5, 8), asteroids))
     }
 
     @Test
@@ -55,7 +56,7 @@ class Day10Test {
         )
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(35, value)
-        assertEquals(35, numberObservables(Point(1, 2), asteroids))
+        assertEquals(35, numberObservables(IntVec2(1, 2), asteroids))
     }
 
     @Test
@@ -74,7 +75,7 @@ class Day10Test {
         )
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(41, value)
-        assertEquals(41, numberObservables(Point(6, 3), asteroids))
+        assertEquals(41, numberObservables(IntVec2(6, 3), asteroids))
     }
 
 
@@ -104,19 +105,19 @@ class Day10Test {
         )
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(210, value)
-        assertEquals(210, numberObservables(Point(11, 13), asteroids))
+        assertEquals(210, numberObservables(IntVec2(11, 13), asteroids))
 
-        val shootingOrder = shootingOrder(Point(11, 13), asteroids)
-        assertEquals(shootingOrder[0], Point(11, 12))
-        assertEquals(shootingOrder[1], Point(12, 1))
-        assertEquals(shootingOrder[2], Point(12, 2))
-        assertEquals(shootingOrder[9], Point(12, 8))
-        assertEquals(shootingOrder[19], Point(16, 0))
-        assertEquals(shootingOrder[49], Point(16, 9))
-        assertEquals(shootingOrder[99], Point(10, 16))
-        assertEquals(shootingOrder[198], Point(9, 6))
-        assertEquals(shootingOrder[199], Point(8, 2))
-        assertEquals(shootingOrder[200], Point(10, 9))
-        assertEquals(shootingOrder[298], Point(11, 1))
+        val shootingOrder = shootingOrder(IntVec2(11, 13), asteroids)
+        assertEquals(shootingOrder[0], IntVec2(11, 12))
+        assertEquals(shootingOrder[1], IntVec2(12, 1))
+        assertEquals(shootingOrder[2], IntVec2(12, 2))
+        assertEquals(shootingOrder[9], IntVec2(12, 8))
+        assertEquals(shootingOrder[19], IntVec2(16, 0))
+        assertEquals(shootingOrder[49], IntVec2(16, 9))
+        assertEquals(shootingOrder[99], IntVec2(10, 16))
+        assertEquals(shootingOrder[198], IntVec2(9, 6))
+        assertEquals(shootingOrder[199], IntVec2(8, 2))
+        assertEquals(shootingOrder[200], IntVec2(10, 9))
+        assertEquals(shootingOrder[298], IntVec2(11, 1))
     }
 }

@@ -1,27 +1,15 @@
 package day8
 
+import util.chunk
 import util.sequence
+import util.transpose
 
-fun <T> List<T>.chunk(chunkSize: Int): List<List<T>>? {
-    return if (size % chunkSize != 0) null
-    else (0..size / chunkSize).zipWithNext().map { (from, to) -> subList(from * chunkSize, to * chunkSize) }
-}
-
-fun <T> List<List<T>>.transpose(): List<List<T>> = when {
-    isEmpty() -> emptyList()
-    else -> {
-        val init = first().map { listOf(it) }
-        drop(1).fold(init) { acc, list ->
-            acc.zip(list).map { (l, el) -> l + el }
-        }
-    }
-}
+private const val X_SIZE = 25
+private const val Y_SIZE = 6
 
 fun main() {
     val inp = object {}.javaClass.getResource("/day8/input.txt").readText().trim()
-    val xSize = 25
-    val ySize = 6
-    val chunks = inp.toList().chunk(xSize * ySize)
+    val chunks = inp.toList().chunk(X_SIZE * Y_SIZE)
     val layerWithMinZero = chunks
         ?.minBy { it.count { c -> c == '0' } }
         ?: return
@@ -35,7 +23,7 @@ fun main() {
                 else -> ' '
             }
         }
-        .chunk(xSize)
+        .chunk(X_SIZE)
         ?.sequence()
     println(
         img?.joinToString(

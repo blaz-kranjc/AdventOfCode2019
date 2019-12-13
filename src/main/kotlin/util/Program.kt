@@ -92,7 +92,7 @@ class Program(private val initialInstructions: List<Long>) {
     fun run(args: List<Long> = emptyList()): Pair<StopType, List<Long>> =
         runImpl(args)
 
-    private fun reset() {
+    fun reset() {
         position = 0
         accessOffset = 0
         instructions = initialInstructions.toMutableList()

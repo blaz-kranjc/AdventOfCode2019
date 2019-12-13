@@ -1,5 +1,6 @@
 package day3
 
+import util.Direction
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

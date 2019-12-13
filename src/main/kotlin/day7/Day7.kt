@@ -1,12 +1,8 @@
 package day7
 
 import util.Program
+import util.generatePermutations
 import util.sequence
-
-private fun <T> generatePermutations(l: List<T>): List<List<T>> = when (l.size) {
-    1 -> listOf(listOf(l.first()))
-    else -> l.flatMap { e -> generatePermutations(l - e).map { it + e } }
-}
 
 class AmplifierSequence(private val program: Program) {
     private val memo: MutableMap<Pair<Int, Long>, Long> = mutableMapOf()
