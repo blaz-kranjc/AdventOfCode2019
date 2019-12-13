@@ -1,11 +1,10 @@
 package day10
 
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
 import util.IntVec2
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.fail
 
-// TODO how do I do parametrized tests with kotlin test
 class Day10Test {
     @Test
     fun `Provided example 1 works correctly`() {
@@ -78,7 +77,6 @@ class Day10Test {
         assertEquals(41, numberObservables(IntVec2(6, 3), asteroids))
     }
 
-
     @Test
     fun `Provided example 5 works correctly`() {
         val asteroids = parseAsteroids(
@@ -106,7 +104,32 @@ class Day10Test {
         val (_, value) = bestObservationPoint(asteroids) ?: fail()
         assertEquals(210, value)
         assertEquals(210, numberObservables(IntVec2(11, 13), asteroids))
+    }
 
+    @Test
+    fun `Provided example for shooting order works correctly`() {
+        val asteroids = parseAsteroids(
+            ".#..##.###...#######\n" +
+                    "##.############..##.\n" +
+                    ".#.######.########.#\n" +
+                    ".###.#######.####.#.\n" +
+                    "#####.##.#.##.###.##\n" +
+                    "..#####..#.#########\n" +
+                    "####################\n" +
+                    "#.####....###.#.#.##\n" +
+                    "##.#################\n" +
+                    "#####.##.###..####..\n" +
+                    "..######..##.#######\n" +
+                    "####.##.####...##..#\n" +
+                    ".#####..#.######.###\n" +
+                    "##...#.##########...\n" +
+                    "#.##########.#######\n" +
+                    ".####.#.###.###.#.##\n" +
+                    "....##.##.###..#####\n" +
+                    ".#.#.###########.###\n" +
+                    "#.#.#.#####.####.###\n" +
+                    "###.##.####.##.#..##"
+        )
         val shootingOrder = shootingOrder(IntVec2(11, 13), asteroids)
         assertEquals(shootingOrder[0], IntVec2(11, 12))
         assertEquals(shootingOrder[1], IntVec2(12, 1))

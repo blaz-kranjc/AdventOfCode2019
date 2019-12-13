@@ -1,13 +1,15 @@
 package day4
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.assertFalse
 
 class Day4Test {
-    private fun assertAscending(list: List<Int>) {
-        list.zipWithNext().forEach { (l, r) -> assertTrue(l <= r) }
+    companion object {
+        private fun assertAscending(list: List<Int>) {
+            list.zipWithNext().forEach { (l, r) -> assertTrue(l <= r) }
+        }
     }
 
     @Test

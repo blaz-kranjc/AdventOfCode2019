@@ -1,8 +1,8 @@
 package util
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 
 class UtilitiesTest {
     @Test
@@ -15,7 +15,7 @@ class UtilitiesTest {
     @Test
     fun `Sequence returns same value if no nulls`() {
         assertEquals(listOf(1, 2, 3).sequence(), listOf(1, 2, 3))
-        assertEquals(listOf<Int>().sequence(), listOf())
+        assertEquals(listOf<Int>().sequence(), listOf<Int>())
     }
 
     @Test

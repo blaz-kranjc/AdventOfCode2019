@@ -1,7 +1,7 @@
 package util
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 // TODO add tests removed from day 2 to here
 class ProgramTest {
