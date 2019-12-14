@@ -1,8 +1,8 @@
 package day10
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 import util.IntVec2
 
 class Day10Test {

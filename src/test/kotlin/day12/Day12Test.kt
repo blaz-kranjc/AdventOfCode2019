@@ -1,7 +1,7 @@
 package day12
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import util.IntVec3
 
 class Day12Test {

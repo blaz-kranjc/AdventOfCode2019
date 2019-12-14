@@ -26,7 +26,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-for (i in 1..13) {
+for (i in 1..14) {
     task("day${i}", JavaExec::class) {
         group = "aoc"
         main = "day${i}.Day${i}Kt"
